@@ -1,0 +1,214 @@
+
+
+//////////////////////////////////////////
+
+#!/bin/bash
+
+# Replace these variables with your actual values
+repository_url="https://github.com/yourusername/yourrepository.git"
+branch_name="mybranch"
+
+# Clone the repository
+git clone "$repository_url"
+
+# Change to the repository directory
+cd yourrepository
+
+# Create and switch to a new branch
+git checkout -b "$branch_name"
+
+# Make changes to your project or create new files
+
+# Stage and commit the changes
+git add .
+git commit -m "Your commit message here"
+
+# Push the branch to GitHub
+git push origin "$branch_name"
+
+/////////////////////////////
+
+
+AIM: To understand Continuous integration, Jenkins installation
+
+https://www.jenkins.io/download/
+
+---
+
+AIM: To build Java program using Jenkins.
+
+Step 1: Set Up Your Java Project
+Step 2: Configure Jenkins
+Step 3: Create a Jenkins Job
+Step 4: Save and Build
+Step 5: View Build Results
+
+CODE:
+public class hello{ public static
+void main(String[] args)
+{ for(int i=1;i<=15;i++)
+{
+System.out.println("hi Nidhi"+ i );
+} } }
+
+Step 6: Adding github Repository URL to jenkins dashboard
+Step 7: Execute Windows batch command on jenkins dashboard
+javac filename.java
+java filename
+
+Step 8: Click and save on jenkins dashboard
+Step 9: Upload the java file on your specified githu repository
+Step 10: On jenkis dashboard click BUILD NOW
+Step 11: The file has been uploaded on console (jenkins dashboard)
+
+
+//////////////////////////
+AIM: To build pipeline using Jenkins.
+
+Step 1: Create a New Pipeline Job
+
+1. Log in to your Jenkins dashboard.
+2. Click on "New Item" to create a new job.
+3. Enter a name for your pipeline job and select "Pipeline" as the job type.
+4. Click "OK" to create the job.
+
+Step 2: Configure Pipeline Definition
+
+1. In the job configuration, scroll down to the "Pipeline" section.
+2. In the "Definition" dropdown, select "Pipeline script from SCM" if your pipeline script is in version control (e.g., Git or SVN). Otherwise, choose "Pipeline script."
+3. If using "Pipeline script from SCM," provide the SCM details (repository URL, credentials, etc.).
+4. If using "Pipeline script," you can directly write your pipeline script in the "Script" text area.
+
+Step 3: Write the Pipeline Script
+
+1. Write your Jenkins pipeline script in Groovy DSL. This script defines the stages and steps of your build, test, and deployment process.
+2. Common pipeline stages include checkout, build, test, and deploy. Here's a simple example:
+
+```groovy
+pipeline {
+    agent any
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+        stage('Build') {
+            steps {
+                sh 'mvn clean package'
+            }
+        }
+        stage('Test') {
+            steps {
+                sh 'mvn test'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                sh './deploy-script.sh'
+            }
+        }
+    }
+}
+```
+
+Step 4: Save and Build
+
+1. Save your job configuration.
+2. Click on "Build Now" to trigger your first pipeline run.
+
+Step 5: Monitor Pipeline Progress
+
+1. Go to the pipeline job's dashboard to monitor the progress of the pipeline run.
+2. Click on a specific build number to see the console output and logs for each stage.
+
+Step 6: Configure Pipeline Triggers (Optional)
+
+1. To automate pipeline runs on code commits or other triggers, configure webhooks or polling schedules.
+2. Jenkins can automatically start the pipeline when changes are pushed to your version control system.
+
+Step 7: Notifications (Optional)
+
+1. Configure email notifications or integrate with messaging platforms like Slack to receive alerts on pipeline status.
+
+Example 2:
+pipeline {
+agent any
+stages {
+stage('Build') {
+steps {
+echo 'Hi GeekFLare. Starting to build the App.'
+}
+}
+stage('Test') {
+steps {
+input 'Do you want to proceed?'
+}
+}
+stage('Deploy') {
+parallel {
+stage('Deploy start') {
+steps {
+echo 'Start the deploy...'
+}
+}
+stage('Deploying now') {
+agent {
+docker {
+reuseNode true
+image 'nginx'
+}
+}
+steps {
+echo 'Docker Created'
+}
+}
+}
+}
+stage('Prod') {
+steps {
+echo 'App is prod ready'
+}
+}
+}
+}
+
+
+//////////////////////////////////////////////////
+
+https://raw.githubusercontent.com/sangam14/dockercheatsheets/master/dockercheatsheet8.png
+
+
+wsl --status
+
+wsl --set-default-version 2
+
+docker -v
+
+docker pull hello-world
+
+docker run -d -p 80:80 hello-world
+
+docker ps
+
+docker ps -a
+
+docker rm <container_id>
+
+
+///////////////////////////////////////
+
+use docker commands to create an html image.
+
+-create .html file and Dockerfile
+-inside dockerfile 
+	
+	FROM nginx:alpine
+	COPY . /usr/share/nginx/html/test
+
+-open powershell
+	-docker build -t html .
+	-docker images
+	-docker rmi 
+
+////////////////////////////////////
